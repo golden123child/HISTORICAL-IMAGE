@@ -7,18 +7,18 @@ type Filter = 'all' | 'added' | 'empty';
 
 const DEMO_SAMPLES: Array<{ title: string; category: string; approxYear: string; yearIsApproximate: boolean; country: string; stateRegion: string; cityTown: string; description: string; historicalContext: string; peopleSubjects: string; imageUrl: string; suggestedLabel: string }> = [
   {
-    title: 'Family gathering in the old quarter',
+    title: 'Community life in a historic neighbourhood',
     category: 'Family',
     approxYear: '1968',
     yearIsApproximate: true,
     country: 'Nigeria',
     stateRegion: 'Lagos',
     cityTown: 'Lagos Island',
-    description: 'A family gathered outside their home during a weekend celebration. The photograph captures everyday clothing, architecture, and the warmth of community life.',
-    historicalContext: 'Family photographs like this help document domestic life and neighbourhood connections during the late 1960s.',
-    peopleSubjects: 'Family members across three generations',
-    imageUrl: '/images/archive-moments.jpg',
-    suggestedLabel: 'Family Photograph',
+    description: 'A street scene capturing everyday movement, local architecture, and community life in a historic African neighbourhood.',
+    historicalContext: 'Photographs like this preserve valuable context about place, daily routines, and community memory.',
+    peopleSubjects: 'Local residents and passersby',
+    imageUrl: '/images/archive-africa.jpg',
+    suggestedLabel: 'Street Scene',
   },
   {
     title: 'Community album of remembered places',

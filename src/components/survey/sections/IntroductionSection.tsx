@@ -46,7 +46,7 @@ export default function IntroductionSection() {
           <div className="relative">
             <div className="absolute -inset-3 sm:-inset-4 border border-bronze/20 rounded-[1.75rem] -rotate-1" aria-hidden="true" />
             <div className="relative rounded-[1.5rem] overflow-hidden shadow-[0_20px_60px_-15px_rgba(44,44,44,0.25)] border border-white/60">
-              <img src="/images/archive-moments.jpg" alt="Vintage historical photographs arranged on a table" className="w-full h-[280px] sm:h-[360px] lg:h-[440px] object-cover" />
+              <img src="/images/archive-africa.jpg" alt="Historical archival photograph from an African community" className="w-full h-[280px] sm:h-[360px] lg:h-[440px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/55 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-ivory">
                 <p className="text-[11px] tracking-[0.22em] uppercase text-ivory/70 mb-1">The archive</p>
