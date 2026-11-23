@@ -103,7 +103,7 @@ export default function ReviewSection() {
                 if (!m.historicalContext) missingOptional.push('historical context');
                 return (
                   <div key={slot.id} className="px-6 py-4 flex gap-4">
-                    <img src={slot.imageDataUrl!} alt={m.title || slot.suggestedLabel} className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg bg-[#e9e4db] border border-border-light shrink-0" />
+                    <img src={slot.imageDataUrl!} alt={m.title || slot.suggestedLabel} className="w-24 h-24 sm:w-28 sm:h-28 object-cover rounded-lg bg-[#F5F5F5] border border-border-light shrink-0" />
                     <div className="min-w-0 flex-1">
                       <p className="text-[11px] uppercase tracking-wider text-muted mb-0.5">Picture {String(slot.slotNumber).padStart(2, '0')} · {slot.suggestedLabel}</p>
                       <h3 className="font-medium text-charcoal truncate">{m.title || 'Untitled photograph'}</h3>

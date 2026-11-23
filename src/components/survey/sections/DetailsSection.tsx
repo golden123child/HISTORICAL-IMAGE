@@ -54,7 +54,7 @@ export default function DetailsSection() {
             return (
               <article key={slot.id} className="bg-white border border-border-light rounded-lg overflow-hidden">
                 <div className="flex flex-col sm:flex-row">
-                  <div className="sm:w-56 md:w-64 shrink-0 bg-[#e9e4db]">
+                  <div className="sm:w-56 md:w-64 shrink-0 bg-[#F5F5F5]">
                     <img src={slot.imageDataUrl!} alt={m.title || slot.suggestedLabel} className="w-full h-52 sm:h-full object-cover" />
                   </div>
                   <div className="flex-1 p-5 sm:p-6">

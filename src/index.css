@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ivory: #F7F4EF;
-  --color-ivory-deep: #EFEAE0;
-  --color-cream: #FBF9F5;
-  --color-charcoal: #2C2C2C;
-  --color-charcoal-soft: #4A4A4A;
-  --color-muted: #6B6B66;
-  --color-olive: #3D4A3A;
-  --color-olive-light: #5A6B55;
-  --color-olive-pale: #E8EDE6;
-  --color-bronze: #8B6F47;
-  --color-bronze-light: #A68A64;
-  --color-bronze-pale: #F3EDE3;
-  --color-border: #E5E0D8;
-  --color-border-light: #EDE9E2;
-  --color-danger: #B54A4A;
-  --color-danger-pale: #FDF2F2;
+  --color-ivory: #FFFFFF;
+  --color-ivory-deep: #F5F5F5;
+  --color-cream: #FFFFFF;
+  --color-charcoal: #222222;
+  --color-charcoal-soft: #444444;
+  --color-muted: #666666;
+  --color-olive: #C62828;
+  --color-olive-light: #991B1B;
+  --color-olive-pale: #FDECEC;
+  --color-bronze: #991B1B;
+  --color-bronze-light: #C62828;
+  --color-bronze-pale: #FDECEC;
+  --color-border: #E5E5E5;
+  --color-border-light: #EEEEEE;
+  --color-danger: #B91C1C;
+  --color-danger-pale: #FEF2F2;
   --color-success: #4A7A5A;
   --color-success-pale: #EFF6F1;
   --font-serif: "Cormorant Garamond", Georgia, serif;
@@ -45,8 +45,8 @@ body { margin: 0; min-height: 100vh; background: var(--color-ivory); }
 @media (pointer: fine) {
   ::-webkit-scrollbar { width: 8px; height: 8px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #D4CEC4; border-radius: 4px; }
-  ::-webkit-scrollbar-thumb:hover { background: #B8B0A3; }
+  ::-webkit-scrollbar-thumb { background: #D4D4D4; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #BDBDBD; }
 }
 
 input:-webkit-autofill,

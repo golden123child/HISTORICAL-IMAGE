@@ -106,7 +106,7 @@ export default function LoginForm() {
         </div>
         <div className="flex items-center justify-between gap-4 text-sm">
           <label className="inline-flex items-center gap-2 text-charcoal-soft cursor-pointer select-none">
-            <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="w-4 h-4 rounded border-border accent-[#3D4A3A]" />
+            <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)} className="w-4 h-4 rounded border-border accent-[#C62828]" />
             Remember me
           </label>
           <button type="button" onClick={() => setAuthView('forgot')} className="text-olive hover:text-olive-light font-medium">Forgot password?</button>

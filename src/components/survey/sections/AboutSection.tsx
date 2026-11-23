@@ -138,7 +138,7 @@ export default function AboutSection() {
                   const checked = p.eraOfInterest.includes(era);
                   return (
                     <label key={era} className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-md border text-sm cursor-pointer transition ${checked ? 'border-olive/30 bg-olive-pale/40 text-charcoal' : 'border-border bg-white text-charcoal-soft hover:border-border'}`}>
-                      <input type="checkbox" checked={checked} onChange={() => toggleEra(era)} className="w-4 h-4 accent-[#3D4A3A]" />
+                      <input type="checkbox" checked={checked} onChange={() => toggleEra(era)} className="w-4 h-4 accent-[#C62828]" />
                       <span>{era}</span>
                     </label>
                   );
@@ -148,7 +148,7 @@ export default function AboutSection() {
 
             <div className="pt-2">
               <label className={`flex items-start gap-3 p-4 rounded-lg border text-sm cursor-pointer ${errors.consentToShare ? 'border-danger/30 bg-danger-pale/30' : 'border-border bg-ivory/40'}`}>
-                <input type="checkbox" checked={p.consentToShare} onChange={(e) => set('consentToShare', e.target.checked)} className="mt-0.5 w-4 h-4 accent-[#3D4A3A]" />
+                <input type="checkbox" checked={p.consentToShare} onChange={(e) => set('consentToShare', e.target.checked)} className="mt-0.5 w-4 h-4 accent-[#C62828]" />
                 <span className="text-charcoal-soft leading-relaxed">
                   <span className="font-medium text-charcoal">Contribution consent (demonstration).</span> I confirm that I have the right to share the photographs and information I contribute, and I understand this prototype is for demonstration purposes only. <span className="text-danger">*</span>
                 </span>

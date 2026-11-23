@@ -82,7 +82,7 @@ export default function AuthLayout() {
         <div className="relative z-10 mt-auto px-10 xl:px-14 pb-10 pt-8">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4 text-[11px] text-ivory/45">
-              <span className="inline-flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400/70" />Secure demonstration environment</span>
+              <span className="inline-flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-white/60" />Secure demonstration environment</span>
               <span className="hidden xl:inline w-1 h-1 rounded-full bg-ivory/20" />
               <span className="hidden xl:inline">Prototype for presentation only</span>
             </div>

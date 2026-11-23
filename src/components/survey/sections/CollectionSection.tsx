@@ -244,7 +244,7 @@ export default function CollectionSection() {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M6 6l12 12M18 6l-12 12"/></svg>
               </button>
             </div>
-            <div className="bg-[#e9e4db] flex items-center justify-center max-h-[calc(90vh-60px)] overflow-auto">
+            <div className="bg-[#F5F5F5] flex items-center justify-center max-h-[calc(90vh-60px)] overflow-auto">
               <img src={previewed.imageDataUrl} alt={previewed.metadata.title || `Picture ${previewed.slotNumber}`} className="max-w-full max-h-[calc(90vh-60px)] object-contain" />
             </div>
           </div>
@@ -261,7 +261,7 @@ function PictureCard({ slot, onEdit, onPreview, onRemove }: { slot: PictureSlot;
   return (
     <div className={`group bg-white border rounded-lg overflow-hidden transition-all duration-200 hover:shadow-sm ${hasImage ? 'border-border-light' : 'border-border border-dashed'}`}>
       <button type="button" onClick={hasImage ? onPreview : onEdit} className="w-full text-left" aria-label={hasImage ? `Preview ${title}` : `Add photograph to slot ${slot.slotNumber}`}>
-        <div className={`relative aspect-[4/3] overflow-hidden ${hasImage ? 'bg-[#e9e4db]' : 'bg-ivory/60'}`}>
+        <div className={`relative aspect-[4/3] overflow-hidden ${hasImage ? 'bg-[#F5F5F5]' : 'bg-ivory/60'}`}>
           {hasImage ? (
             <>
               <img src={slot.imageDataUrl!} alt={title} className="w-full h-full object-cover transition duration-500 group-hover:scale-[1.03]" />

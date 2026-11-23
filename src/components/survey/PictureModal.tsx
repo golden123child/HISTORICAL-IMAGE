@@ -142,7 +142,7 @@ export default function PictureModal({ slot, onClose, onSave, onRemoveImage }: P
                   </div>
                 ) : (
                   <div className="rounded-lg border border-border bg-white overflow-hidden">
-                    <div className="bg-[#e9e4db] aspect-[4/3] flex items-center justify-center overflow-hidden">
+                    <div className="bg-[#F5F5F5] aspect-[4/3] flex items-center justify-center overflow-hidden">
                       <img src={imageDataUrl} alt={meta.title || `Picture ${slot.slotNumber} preview`} className="w-full h-full object-contain" />
                     </div>
                     <div className="px-4 py-3 border-t border-border-light">
@@ -189,8 +189,8 @@ export default function PictureModal({ slot, onClose, onSave, onRemoveImage }: P
                   <label htmlFor={`year-${slot.id}`} className="block text-sm font-medium text-charcoal mb-1.5">Approximate year</label>
                   <input id={`year-${slot.id}`} value={meta.approxYear} onChange={(e) => setField('approxYear', e.target.value)} className={inputCls(false)} placeholder="e.g. 1968" disabled={meta.yearUnknown} />
                   <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2">
-                    <label className="inline-flex items-center gap-2 text-xs text-muted cursor-pointer"><input type="checkbox" checked={meta.yearIsApproximate} onChange={(e) => setField('yearIsApproximate', e.target.checked)} className="accent-[#3D4A3A]" />Approximate</label>
-                    <label className="inline-flex items-center gap-2 text-xs text-muted cursor-pointer"><input type="checkbox" checked={meta.yearUnknown} onChange={(e) => { setField('yearUnknown', e.target.checked); if (e.target.checked) setField('approxYear', ''); }} className="accent-[#3D4A3A]" />Year unknown</label>
+                    <label className="inline-flex items-center gap-2 text-xs text-muted cursor-pointer"><input type="checkbox" checked={meta.yearIsApproximate} onChange={(e) => setField('yearIsApproximate', e.target.checked)} className="accent-[#C62828]" />Approximate</label>
+                    <label className="inline-flex items-center gap-2 text-xs text-muted cursor-pointer"><input type="checkbox" checked={meta.yearUnknown} onChange={(e) => { setField('yearUnknown', e.target.checked); if (e.target.checked) setField('approxYear', ''); }} className="accent-[#C62828]" />Year unknown</label>
                   </div>
                 </div>
 
@@ -211,7 +211,7 @@ export default function PictureModal({ slot, onClose, onSave, onRemoveImage }: P
                   <input id={`loc-${slot.id}`} value={meta.locationDetails} onChange={(e) => setField('locationDetails', e.target.value)} className={inputCls(false)} placeholder="e.g. near the old market square" disabled={meta.locationUnknown} />
                 </div>
                 <div className="sm:col-span-2 -mt-1">
-                  <label className="inline-flex items-center gap-2 text-xs text-muted cursor-pointer"><input type="checkbox" checked={meta.locationUnknown} onChange={(e) => setField('locationUnknown', e.target.checked)} className="accent-[#3D4A3A]" />Location unknown</label>
+                  <label className="inline-flex items-center gap-2 text-xs text-muted cursor-pointer"><input type="checkbox" checked={meta.locationUnknown} onChange={(e) => setField('locationUnknown', e.target.checked)} className="accent-[#C62828]" />Location unknown</label>
                 </div>
 
                 <div className="sm:col-span-2">

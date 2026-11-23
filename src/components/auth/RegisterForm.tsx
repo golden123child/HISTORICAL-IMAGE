@@ -114,7 +114,7 @@ export default function RegisterForm() {
 
         <div className="pt-1">
           <label className="flex items-start gap-2.5 text-sm text-charcoal-soft cursor-pointer select-none">
-            <input type="checkbox" checked={form.agree} onChange={(e) => set('agree', e.target.checked)} className="mt-0.5 w-4 h-4 rounded border-border accent-[#3D4A3A]" />
+            <input type="checkbox" checked={form.agree} onChange={(e) => set('agree', e.target.checked)} className="mt-0.5 w-4 h-4 rounded border-border accent-[#C62828]" />
             <span>
               I understand this is a demonstration prototype and agree to the illustrative <span className="text-olive font-medium">Terms</span> and <span className="text-olive font-medium">Privacy Notice</span>. <span className="text-danger">*</span>
             </span>
