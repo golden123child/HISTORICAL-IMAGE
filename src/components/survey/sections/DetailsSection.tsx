@@ -31,12 +31,12 @@ export default function DetailsSection() {
     <div className="max-w-5xl">
       <p className="text-[11px] tracking-[0.28em] uppercase text-bronze font-medium mb-3">Section 4 of 5</p>
       <h1 className="font-serif text-4xl sm:text-5xl text-charcoal leading-[1.1] mb-3">Picture details</h1>
-      <p className="text-muted max-w-2xl leading-relaxed mb-8">
+      <p className="text-[15px] sm:text-base text-muted max-w-2xl leading-relaxed mb-10">
         Add context to the photographs you've contributed. Titles, dates, locations, and stories help future viewers understand what each image represents.
       </p>
 
       {uploaded.length === 0 ? (
-        <div className="bg-white border border-border-light rounded-lg px-6 py-12 text-center">
+        <div className="bg-white border border-border-light rounded-lg px-6 py-14 text-center">
           <div className="w-14 h-14 rounded-full bg-ivory-deep text-muted flex items-center justify-center mx-auto mb-4">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-2-1.5L3 17"/></svg>
           </div>
@@ -47,7 +47,7 @@ export default function DetailsSection() {
           </button>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-5">
           {uploaded.map((slot) => {
             const m = slot.metadata;
             const pct = completionFor(slot);

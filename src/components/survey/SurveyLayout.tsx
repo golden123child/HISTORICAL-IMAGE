@@ -205,7 +205,7 @@ export default function SurveyLayout() {
 
       {/* Main content */}
       <main className="lg:pl-[290px] xl:pl-[320px] min-h-screen">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-8 lg:py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-10 lg:py-14">
           <div key={current} className="animate-fade-in">
             {renderSection()}
           </div>

@@ -13,8 +13,8 @@ export default function ConfirmationSection() {
   const sub = state.submission;
 
   return (
-    <div className="max-w-3xl mx-auto py-4 sm:py-8">
-      <div className="text-center mb-10">
+    <div className="max-w-3xl mx-auto py-6 sm:py-10">
+      <div className="text-center mb-12">
         <div className="inline-flex items-center justify-center w-18 h-18 rounded-full bg-olive-pale text-olive mb-6 shadow-sm" style={{ width: 72, height: 72 }}>
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
         </div>

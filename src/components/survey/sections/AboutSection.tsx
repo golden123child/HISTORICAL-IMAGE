@@ -52,11 +52,11 @@ export default function AboutSection() {
 
   return (
     <div className="max-w-4xl">
-      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10">
         <div>
           <p className="text-[11px] tracking-[0.28em] uppercase text-bronze font-medium mb-3">Section 2 of 5</p>
           <h1 className="font-serif text-4xl sm:text-5xl text-charcoal leading-[1.1] mb-3">About the participant</h1>
-          <p className="text-muted max-w-2xl leading-relaxed">
+          <p className="text-[15px] sm:text-base text-muted max-w-2xl leading-relaxed">
             Tell us a little about yourself. This context helps us understand the voices and communities represented in the collection.
           </p>
         </div>
@@ -66,12 +66,12 @@ export default function AboutSection() {
         </div>
       </div>
 
-      <div className="space-y-8">
+      <div className="space-y-6">
         <div className="bg-white border border-border-light rounded-lg p-6 sm:p-8">
           <h2 className="font-serif text-2xl text-charcoal mb-1">Personal information</h2>
           <p className="text-sm text-muted mb-6">Fields marked with <span className="text-danger">*</span> are required.</p>
 
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-2 gap-x-6 gap-y-5">
             <div className="sm:col-span-2">
               <label htmlFor="fullName" className="block text-sm font-medium text-charcoal mb-1.5">Full name <span className="text-danger">*</span></label>
               <input id="fullName" value={p.fullName} onChange={(e) => set('fullName', e.target.value)} className={inputCls('fullName')} placeholder="Your full name" autoComplete="name" />
@@ -159,7 +159,7 @@ export default function AboutSection() {
         </div>
       </div>
 
-      <div className="mt-8 flex flex-col-reverse sm:flex-row sm:justify-between gap-3">
+      <div className="mt-10 flex flex-col-reverse sm:flex-row sm:justify-between gap-3 pt-2">
         <button type="button" onClick={() => { setSection('introduction'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-white text-charcoal px-6 py-3 font-medium text-[15px] hover:bg-ivory-deep/40 transition">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
           Previous

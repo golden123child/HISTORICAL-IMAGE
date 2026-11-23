@@ -145,17 +145,17 @@ export default function CollectionSection() {
 
   return (
     <div className="max-w-6xl">
-      <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-5 mb-8">
+      <div className="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-6 mb-10">
         <div>
           <p className="inline-flex items-center gap-2 text-[11px] tracking-[0.28em] uppercase text-bronze font-medium mb-3">
             <span className="w-6 h-px bg-bronze/60" /> Section 3 of 5
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl text-charcoal leading-[1.1] mb-3">Your picture collection</h1>
-          <p className="text-muted max-w-2xl leading-relaxed">
+          <p className="text-[15px] sm:text-base text-muted max-w-2xl leading-relaxed">
             Help preserve history by sharing photographs and the stories behind them. Add up to 26 images — each one contributes to the archive.
           </p>
         </div>
-        <div className="bg-white border border-border-light rounded-lg px-5 py-4 w-full xl:w-auto xl:min-w-[280px] ">
+        <div className="bg-white border border-border-light rounded-lg px-5 py-4 w-full xl:w-auto xl:min-w-[280px]">
           <div className="flex items-end justify-between gap-4 mb-2">
             <div>
               <p className="text-[11px] uppercase tracking-wider text-muted mb-1">Collection progress</p>
@@ -173,7 +173,7 @@ export default function CollectionSection() {
         </div>
       </div>
 
-      <div className="bg-white border border-border-light rounded-lg p-4 sm:p-5 mb-6 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+      <div className="bg-white border border-border-light rounded-lg p-4 sm:p-5 mb-8 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
         <div className="flex flex-wrap gap-2">
           {filterBtn('all', 'All slots', 26)}
           {filterBtn('added', 'Added', uploadedCount)}

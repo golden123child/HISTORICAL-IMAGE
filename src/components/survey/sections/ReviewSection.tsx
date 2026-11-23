@@ -36,7 +36,7 @@ export default function ReviewSection() {
     <div className="max-w-5xl">
       <p className="text-[11px] tracking-[0.28em] uppercase text-bronze font-medium mb-3">Section 5 of 5</p>
       <h1 className="font-serif text-4xl sm:text-5xl text-charcoal leading-[1.1] mb-3">Review & submit</h1>
-      <p className="text-muted max-w-2xl leading-relaxed mb-8">
+      <p className="text-[15px] sm:text-base text-muted max-w-2xl leading-relaxed mb-10">
         Review your information and photographs before submitting. You can return to any section to make changes.
       </p>
 
