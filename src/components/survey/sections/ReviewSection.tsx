@@ -131,21 +131,27 @@ export default function ReviewSection() {
         </section>
       </div>
 
-      <div className="mt-8 flex flex-col-reverse sm:flex-row sm:justify-between gap-3">
+      <div className="mt-8 flex flex-col-reverse sm:flex-row sm:justify-between gap-3 no-print">
         <button type="button" onClick={() => { setSection('details'); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-white text-charcoal px-6 py-3 font-medium text-[15px] hover:bg-ivory-deep/40 transition">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
           Previous
         </button>
-        <button type="button" onClick={onSubmit} disabled={isSubmitting} className="inline-flex items-center justify-center gap-2 rounded-md bg-olive text-white px-7 py-3 font-medium text-[15px] hover:bg-olive-light transition disabled:opacity-60 disabled:cursor-not-allowed">
-          {isSubmitting ? (
-            <>
-              <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity="0.25"/><path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
-              Submitting...
-            </>
-          ) : (
-            'Submit demonstration survey'
-          )}
-        </button>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <button type="button" onClick={() => window.print()} className="inline-flex items-center justify-center gap-2 rounded-md border border-border bg-white text-charcoal px-6 py-3 font-medium text-[15px] hover:bg-ivory-deep/40 transition">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+            Print summary
+          </button>
+          <button type="button" onClick={onSubmit} disabled={isSubmitting} className="inline-flex items-center justify-center gap-2 rounded-md bg-olive text-white px-7 py-3 font-medium text-[15px] hover:bg-olive-light transition disabled:opacity-60 disabled:cursor-not-allowed shadow-sm">
+            {isSubmitting ? (
+              <>
+                <svg className="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity="0.25"/><path d="M22 12a10 10 0 0 0-10-10" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/></svg>
+                Submitting...
+              </>
+            ) : (
+              'Submit demonstration survey'
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );

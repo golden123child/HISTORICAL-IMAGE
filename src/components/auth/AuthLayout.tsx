@@ -8,12 +8,21 @@ export default function AuthLayout() {
 
   return (
     <div className="min-h-screen bg-ivory flex">
-      <div className="hidden lg:flex lg:w-[48%] xl:w-[46%] relative overflow-hidden bg-olive text-ivory p-12 xl:p-16 flex-col justify-between">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_rgba(139,111,71,0.25),_transparent_60%),radial-gradient(ellipse_at_bottom_right,_rgba(247,244,239,0.08),_transparent_55%)]" />
-        <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'linear-gradient(rgba(247,244,239,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(247,244,239,.5) 1px, transparent 1px)', backgroundSize: '48px 48px' }} />
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-16">
-            <div className="w-10 h-10 rounded-full border border-ivory/30 flex items-center justify-center">
+      {/* Left visual panel */}
+      <div className="hidden lg:flex lg:w-[52%] xl:w-[50%] relative overflow-hidden bg-charcoal text-ivory flex-col justify-between">
+        <img
+          src="/images/archive-collection.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover scale-[1.02]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-charcoal/80 via-charcoal/55 to-olive/45" />
+        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/85 via-charcoal/20 to-charcoal/30" />
+        <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: 'linear-gradient(rgba(247,244,239,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(247,244,239,.6) 1px, transparent 1px)', backgroundSize: '56px 56px' }} />
+
+        <div className="relative z-10 p-10 xl:p-14">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-full border border-ivory/30 bg-white/5 backdrop-blur-sm flex items-center justify-center">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <circle cx="9" cy="10" r="2" />
@@ -21,44 +30,54 @@ export default function AuthLayout() {
               </svg>
             </div>
             <div>
-              <p className="font-serif text-xl tracking-wide text-ivory">Historical Image Collection</p>
-              <p className="text-[11px] tracking-[0.2em] uppercase text-ivory/60">Archive Survey</p>
+              <p className="font-serif text-[22px] tracking-wide text-ivory leading-tight">Historical Image Collection</p>
+              <p className="text-[11px] tracking-[0.24em] uppercase text-ivory/60">Archive Survey Platform</p>
             </div>
           </div>
-          <p className="text-[11px] tracking-[0.28em] uppercase text-bronze-light mb-5">A community archive initiative</p>
-          <h1 className="font-serif text-4xl xl:text-5xl leading-[1.15] text-ivory mb-6 max-w-xl">
-            Preserving photographs,<br />
-            <span className="italic text-ivory/85">honouring the stories behind them.</span>
-          </h1>
-          <p className="text-ivory/70 text-base leading-relaxed max-w-lg">
-            Every image holds a fragment of history — a face, a place, a moment that deserves to be remembered. Your contribution helps build a living archive for future generations.
-          </p>
         </div>
-        <div className="relative z-10 space-y-6">
-          <div className="grid grid-cols-3 gap-6 max-w-lg pt-8 border-t border-ivory/15">
-            <div>
-              <p className="font-serif text-3xl text-ivory">26</p>
-              <p className="text-xs tracking-wide uppercase text-ivory/55 mt-1">Photographs per participant</p>
-            </div>
-            <div>
-              <p className="font-serif text-3xl text-ivory">20k</p>
-              <p className="text-xs tracking-wide uppercase text-ivory/55 mt-1">Voices in the collection</p>
-            </div>
-            <div>
-              <p className="font-serif text-3xl text-ivory">1</p>
-              <p className="text-xs tracking-wide uppercase text-ivory/55 mt-1">Shared history preserved</p>
-            </div>
-          </div>
-          <p className="text-[11px] text-ivory/40 leading-relaxed max-w-lg">
-            Demonstration prototype — for presentation and feedback purposes only. No data is transmitted to a production system.
+
+        <div className="relative z-10 px-10 xl:px-14 pb-4">
+          <p className="inline-flex items-center gap-2 text-[11px] tracking-[0.28em] uppercase text-bronze-light/90 font-medium mb-5">
+            <span className="w-8 h-px bg-bronze-light/60" />
+            Community Archive Initiative
           </p>
+          <h1 className="font-serif text-4xl xl:text-[3.5rem] leading-[1.08] text-ivory mb-6 max-w-xl">
+            Every photograph holds a piece of <span className="italic text-ivory/90">history.</span>
+          </h1>
+          <p className="text-ivory/75 text-base xl:text-lg leading-relaxed max-w-lg mb-10">
+            Help preserve memories, people, and places for future generations. Contribute your photographs and the stories behind them to a living historical archive.
+          </p>
+
+          <div className="grid grid-cols-3 gap-5 max-w-xl">
+            {[
+              { value: '26', label: 'Photos per participant' },
+              { value: '20,000', label: 'Voices to be heard' },
+              { value: '1', label: 'Shared legacy' },
+            ].map((stat) => (
+              <div key={stat.label} className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-4">
+                <p className="font-serif text-3xl xl:text-4xl text-ivory leading-none mb-1.5">{stat.value}</p>
+                <p className="text-[11px] tracking-wide uppercase text-ivory/55 leading-snug">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative z-10 px-10 xl:px-14 pb-10">
+          <div className="flex items-center gap-4 text-[11px] text-ivory/45">
+            <span className="inline-flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400/70" />Secure demonstration environment</span>
+            <span className="w-1 h-1 rounded-full bg-ivory/20" />
+            <span>Prototype for presentation only</span>
+          </div>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col min-h-screen">
-        <div className="lg:hidden px-6 pt-8 pb-2">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-olive text-ivory flex items-center justify-center">
+      {/* Right form panel */}
+      <div className="flex-1 flex flex-col min-h-screen relative">
+        <div className="lg:hidden relative h-44 sm:h-52 overflow-hidden">
+          <img src="/images/archive-collection.jpg" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ivory via-charcoal/40 to-charcoal/50" />
+          <div className="relative z-10 px-6 pt-7 flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full bg-white/10 backdrop-blur border border-white/20 text-ivory flex items-center justify-center">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <circle cx="9" cy="10" r="2" />
@@ -66,20 +85,24 @@ export default function AuthLayout() {
               </svg>
             </div>
             <div>
-              <p className="font-serif text-lg text-charcoal leading-tight">Historical Image Collection</p>
-              <p className="text-[10px] tracking-[0.2em] uppercase text-muted">Archive Survey</p>
+              <p className="font-serif text-lg text-ivory leading-tight">Historical Image Collection</p>
+              <p className="text-[10px] tracking-[0.2em] uppercase text-ivory/65">Archive Survey</p>
             </div>
           </div>
         </div>
-        <div className="flex-1 flex items-center justify-center px-6 py-10 sm:px-10">
-          <div className="w-full max-w-[460px] animate-fade-in">
-            {state.authView === 'login' && <LoginForm />}
-            {state.authView === 'register' && <RegisterForm />}
-            {state.authView === 'forgot' && <ForgotPasswordForm />}
+
+        <div className="flex-1 flex items-center justify-center px-5 sm:px-8 py-8 sm:py-12 lg:px-12">
+          <div className="w-full max-w-[480px] animate-fade-in">
+            <div className="bg-white/70 lg:bg-white/55 backdrop-blur-[2px] lg:backdrop-blur-sm rounded-2xl lg:rounded-2xl p-1 sm:p-0 lg:p-10 lg:border lg:border-border-light/70 lg:shadow-[0_8px_40px_-12px_rgba(44,44,44,0.08)]">
+              {state.authView === 'login' && <LoginForm />}
+              {state.authView === 'register' && <RegisterForm />}
+              {state.authView === 'forgot' && <ForgotPasswordForm />}
+            </div>
           </div>
         </div>
-        <div className="px-6 py-6 text-center lg:text-left lg:px-12">
-          <p className="text-xs text-muted">&copy; {new Date().getFullYear()} Historical Image Collection. Demonstration prototype.</p>
+
+        <div className="px-6 py-5 text-center text-xs text-muted">
+          &copy; {new Date().getFullYear()} Historical Image Collection. Demonstration prototype.
         </div>
       </div>
     </div>

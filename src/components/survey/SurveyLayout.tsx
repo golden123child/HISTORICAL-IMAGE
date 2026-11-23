@@ -137,12 +137,12 @@ export default function SurveyLayout() {
   return (
     <div className="min-h-screen bg-ivory">
       {/* Desktop sidebar */}
-      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-[290px] xl:w-[320px] bg-cream border-r border-border-light flex-col z-30">
+      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:flex lg:w-[290px] xl:w-[320px] bg-cream border-r border-border-light flex-col z-30 no-print">
         <NavContent />
       </aside>
 
       {/* Mobile top bar */}
-      <div className="lg:hidden sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-border-light">
+      <div className="lg:hidden sticky top-0 z-40 bg-cream/95 backdrop-blur border-b border-border-light no-print">
         <div className="px-4 py-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">
             <div className="w-8 h-8 rounded-full bg-olive text-ivory flex items-center justify-center shrink-0">
