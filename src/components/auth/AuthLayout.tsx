@@ -53,7 +53,7 @@ export default function AuthLayout() {
           </div>
         </div>
 
-        <div className="relative z-10 px-10 xl:px-14 pt-8 xl:pt-12 max-w-2xl">
+        <div className="relative z-10 px-10 xl:px-14 pt-6 xl:pt-10 max-w-2xl">
           <p className="inline-flex items-center gap-2 text-[11px] tracking-[0.28em] uppercase text-bronze-light/90 font-medium mb-5">
             <span className="w-8 h-px bg-bronze-light/60" />
             Community Archive Initiative
@@ -61,18 +61,18 @@ export default function AuthLayout() {
           <h1 className="font-serif text-4xl xl:text-[3.5rem] leading-[1.08] text-ivory mb-5 max-w-xl">
             Every photograph holds a piece of <span className="italic text-ivory/90">history.</span>
           </h1>
-          <p className="text-ivory/78 text-base xl:text-lg leading-relaxed max-w-lg mb-8">
+          <p className="text-ivory/78 text-base xl:text-lg leading-relaxed max-w-lg mb-7">
             Contribute photographs and the stories behind them to a carefully curated historical archive, preserved with respect for the people and communities they represent.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-4 max-w-xl pt-6 border-t border-white/15">
             {[
               { title: 'Curated Contributions', desc: 'A structured process for sharing photographs and their context.' },
               { title: 'Meaningful Context', desc: 'Capture the stories, places, and memories behind each image.' },
               { title: 'Preserved with Care', desc: 'Designed to honour history through a respectful, professional experience.' },
             ].map((item) => (
-              <div key={item.title} className="rounded-xl border border-white/10 bg-white/[0.07] backdrop-blur-sm px-4 py-4">
-                <p className="text-sm font-medium text-ivory mb-1.5 leading-snug">{item.title}</p>
+              <div key={item.title}>
+                <p className="text-sm font-medium text-ivory mb-1 leading-snug">{item.title}</p>
                 <p className="text-[12px] leading-relaxed text-ivory/60">{item.desc}</p>
               </div>
             ))}
@@ -139,7 +139,7 @@ export default function AuthLayout() {
 
         <div className="flex-1 flex items-center justify-center px-5 sm:px-8 py-8 sm:py-12 lg:px-12">
           <div className="w-full max-w-[480px] animate-fade-in">
-            <div className="bg-white/70 lg:bg-white/55 backdrop-blur-[2px] lg:backdrop-blur-sm rounded-2xl lg:rounded-2xl p-1 sm:p-0 lg:p-10 lg:border lg:border-border-light/70 lg:shadow-[0_8px_40px_-12px_rgba(44,44,44,0.08)]">
+            <div className="bg-white lg:bg-white rounded-lg p-5 sm:p-7 lg:p-10 border border-border-light">
               {state.authView === 'login' && <LoginForm />}
               {state.authView === 'register' && <RegisterForm />}
               {state.authView === 'forgot' && <ForgotPasswordForm />}

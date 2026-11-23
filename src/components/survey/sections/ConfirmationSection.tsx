@@ -15,7 +15,7 @@ export default function ConfirmationSection() {
   return (
     <div className="max-w-3xl mx-auto py-4 sm:py-8">
       <div className="text-center mb-10">
-        <div className="inline-flex items-center justify-center w-18 h-18 rounded-full bg-olive-pale text-olive mb-6 shadow-[0_8px_30px_-12px_rgba(61,74,58,0.45)]" style={{ width: 72, height: 72 }}>
+        <div className="inline-flex items-center justify-center w-18 h-18 rounded-full bg-olive-pale text-olive mb-6 shadow-sm" style={{ width: 72, height: 72 }}>
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
         </div>
         <p className="text-[11px] tracking-[0.28em] uppercase text-bronze font-medium mb-3">Demonstration submission complete</p>
@@ -25,8 +25,8 @@ export default function ConfirmationSection() {
         </p>
       </div>
 
-      <div className="bg-white border border-border-light rounded-2xl overflow-hidden mb-6 shadow-[0_2px_16px_-8px_rgba(44,44,44,0.08)]">
-        <div className="px-6 sm:px-8 py-5 border-b border-border-light bg-gradient-to-r from-ivory/70 to-cream">
+      <div className="bg-white border border-border-light rounded-lg overflow-hidden mb-6 shadow-sm">
+        <div className="px-6 sm:px-8 py-5 border-b border-border-light bg-ivory/40">
           <h2 className="font-serif text-2xl text-charcoal">Submission summary</h2>
           <p className="text-sm text-muted mt-1">Simulated submission record for demonstration purposes.</p>
         </div>
@@ -48,7 +48,7 @@ export default function ConfirmationSection() {
         </dl>
       </div>
 
-      <div className="rounded-xl border border-bronze/20 bg-bronze-pale/40 px-5 py-4 text-sm text-charcoal-soft leading-relaxed mb-8 flex gap-3">
+      <div className="rounded-lg border border-bronze/20 bg-bronze-pale/40 px-5 py-4 text-sm text-charcoal-soft leading-relaxed mb-8 flex gap-3">
         <svg className="w-5 h-5 text-bronze shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         <p><span className="font-medium text-charcoal">Demonstration prototype notice.</span> This submission has been simulated locally in your browser. No data has been transmitted to a production system, database, or server.</p>
       </div>

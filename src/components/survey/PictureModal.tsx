@@ -106,7 +106,7 @@ export default function PictureModal({ slot, onClose, onSave, onRemoveImage }: P
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6" role="dialog" aria-modal="true" aria-label={`Edit picture ${slot.slotNumber}`}>
       <div className="absolute inset-0 bg-charcoal/40 backdrop-blur-[2px]" onClick={onClose} />
-      <div ref={dialogRef} tabIndex={-1} className="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-2xl bg-ivory shadow-2xl border border-border-light animate-fade-in-scale flex flex-col">
+      <div ref={dialogRef} tabIndex={-1} className="relative w-full max-w-5xl max-h-[92vh] overflow-hidden rounded-lg bg-ivory shadow-2xl border border-border-light animate-fade-in-scale flex flex-col">
         <div className="flex items-center justify-between gap-4 px-5 sm:px-7 py-4 border-b border-border-light bg-cream/80">
           <div>
             <p className="text-[11px] tracking-[0.2em] uppercase text-bronze font-medium">Picture {String(slot.slotNumber).padStart(2, '0')}</p>
@@ -128,7 +128,7 @@ export default function PictureModal({ slot, onClose, onSave, onRemoveImage }: P
                     onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
                     onDragLeave={() => setDragOver(false)}
                     onDrop={onDrop}
-                    className={`relative rounded-xl border-2 border-dashed px-5 py-10 text-center transition ${dragOver ? 'border-olive bg-olive-pale/40' : errors.image ? 'border-danger/40 bg-danger-pale/20' : 'border-border bg-white hover:border-olive/40 hover:bg-ivory/40'}`}
+                    className={`relative rounded-lg border-2 border-dashed px-5 py-10 text-center transition ${dragOver ? 'border-olive bg-olive-pale/40' : errors.image ? 'border-danger/40 bg-danger-pale/20' : 'border-border bg-white hover:border-olive/40 hover:bg-ivory/40'}`}
                   >
                     <div className="w-12 h-12 rounded-full bg-ivory-deep text-muted flex items-center justify-center mx-auto mb-4">
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-2-1.5L3 17"/></svg>
@@ -141,7 +141,7 @@ export default function PictureModal({ slot, onClose, onSave, onRemoveImage }: P
                     <input ref={fileInputRef} type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" className="hidden" onChange={onFileChange} />
                   </div>
                 ) : (
-                  <div className="rounded-xl border border-border bg-white overflow-hidden">
+                  <div className="rounded-lg border border-border bg-white overflow-hidden">
                     <div className="bg-[#e9e4db] aspect-[4/3] flex items-center justify-center overflow-hidden">
                       <img src={imageDataUrl} alt={meta.title || `Picture ${slot.slotNumber} preview`} className="w-full h-full object-contain" />
                     </div>

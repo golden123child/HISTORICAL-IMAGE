@@ -50,7 +50,7 @@ export default function ReviewSection() {
       )}
 
       <div className="space-y-6">
-        <section className="bg-white border border-border-light rounded-xl overflow-hidden">
+        <section className="bg-white border border-border-light rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-border-light flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-ivory/30">
             <div>
               <h2 className="font-serif text-2xl text-charcoal">Participant information</h2>
@@ -75,7 +75,7 @@ export default function ReviewSection() {
           )}
         </section>
 
-        <section className="bg-white border border-border-light rounded-xl overflow-hidden">
+        <section className="bg-white border border-border-light rounded-lg overflow-hidden">
           <div className="px-6 py-4 border-b border-border-light flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-ivory/30">
             <div>
               <h2 className="font-serif text-2xl text-charcoal">Picture collection</h2>
@@ -123,7 +123,7 @@ export default function ReviewSection() {
           )}
         </section>
 
-        <section className="bg-olive-pale/30 border border-olive/10 rounded-xl px-6 py-5">
+        <section className="bg-olive-pale/30 border border-olive/10 rounded-lg px-6 py-5">
           <h2 className="font-serif text-xl text-charcoal mb-1">Ready to submit?</h2>
           <p className="text-sm text-charcoal-soft leading-relaxed">
             Submitting will create a simulated demonstration submission. No data is sent to a real server. You can restart the demonstration after submission.

@@ -67,7 +67,7 @@ export default function AboutSection() {
       </div>
 
       <div className="space-y-8">
-        <div className="bg-white border border-border-light rounded-xl p-6 sm:p-8">
+        <div className="bg-white border border-border-light rounded-lg p-6 sm:p-8">
           <h2 className="font-serif text-2xl text-charcoal mb-1">Personal information</h2>
           <p className="text-sm text-muted mb-6">Fields marked with <span className="text-danger">*</span> are required.</p>
 
@@ -117,7 +117,7 @@ export default function AboutSection() {
           </div>
         </div>
 
-        <div className="bg-white border border-border-light rounded-xl p-6 sm:p-8">
+        <div className="bg-white border border-border-light rounded-lg p-6 sm:p-8">
           <h2 className="font-serif text-2xl text-charcoal mb-1">Your connection to history</h2>
           <p className="text-sm text-muted mb-6">These answers help us understand the perspective behind your contributions.</p>
 

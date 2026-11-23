@@ -36,7 +36,7 @@ export default function DetailsSection() {
       </p>
 
       {uploaded.length === 0 ? (
-        <div className="bg-white border border-border-light rounded-xl px-6 py-12 text-center">
+        <div className="bg-white border border-border-light rounded-lg px-6 py-12 text-center">
           <div className="w-14 h-14 rounded-full bg-ivory-deep text-muted flex items-center justify-center mx-auto mb-4">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-4-4 3-2-1.5L3 17"/></svg>
           </div>
@@ -52,7 +52,7 @@ export default function DetailsSection() {
             const m = slot.metadata;
             const pct = completionFor(slot);
             return (
-              <article key={slot.id} className="bg-white border border-border-light rounded-xl overflow-hidden">
+              <article key={slot.id} className="bg-white border border-border-light rounded-lg overflow-hidden">
                 <div className="flex flex-col sm:flex-row">
                   <div className="sm:w-56 md:w-64 shrink-0 bg-[#e9e4db]">
                     <img src={slot.imageDataUrl!} alt={m.title || slot.suggestedLabel} className="w-full h-52 sm:h-full object-cover" />

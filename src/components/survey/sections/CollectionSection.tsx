@@ -155,7 +155,7 @@ export default function CollectionSection() {
             Help preserve history by sharing photographs and the stories behind them. Add up to 26 images — each one contributes to the archive.
           </p>
         </div>
-        <div className="bg-white border border-border-light rounded-xl px-5 py-4 w-full xl:w-auto xl:min-w-[280px] shadow-[0_2px_12px_-6px_rgba(44,44,44,0.08)]">
+        <div className="bg-white border border-border-light rounded-lg px-5 py-4 w-full xl:w-auto xl:min-w-[280px] ">
           <div className="flex items-end justify-between gap-4 mb-2">
             <div>
               <p className="text-[11px] uppercase tracking-wider text-muted mb-1">Collection progress</p>
@@ -167,13 +167,13 @@ export default function CollectionSection() {
             </div>
           </div>
           <div className="h-2 bg-ivory-deep rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-olive to-olive-light rounded-full transition-all duration-500" style={{ width: `${progressPct}%` }} />
+            <div className="h-full bg-olive rounded-full transition-all duration-500" style={{ width: `${progressPct}%` }} />
           </div>
           <p className="text-xs text-muted mt-2">{uploadedCount === 0 ? 'No photographs added yet.' : uploadedCount === 26 ? 'Collection complete — all slots filled.' : `${26 - uploadedCount} slot${26 - uploadedCount === 1 ? '' : 's'} remaining.`}</p>
         </div>
       </div>
 
-      <div className="bg-white border border-border-light rounded-xl p-4 sm:p-5 mb-6 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
+      <div className="bg-white border border-border-light rounded-lg p-4 sm:p-5 mb-6 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
         <div className="flex flex-wrap gap-2">
           {filterBtn('all', 'All slots', 26)}
           {filterBtn('added', 'Added', uploadedCount)}
@@ -210,7 +210,7 @@ export default function CollectionSection() {
       </div>
 
       {filtered.length === 0 && (
-        <div className="bg-white border border-border-light rounded-xl py-14 text-center text-muted">
+        <div className="bg-white border border-border-light rounded-lg py-14 text-center text-muted">
           <p className="font-serif text-2xl text-charcoal mb-2">No slots in this view</p>
           <p className="text-sm">Try a different filter to see your collection.</p>
         </div>
@@ -234,7 +234,7 @@ export default function CollectionSection() {
       {previewed && previewed.imageDataUrl && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8" role="dialog" aria-modal="true" aria-label="Picture preview" onClick={() => setPreviewSlot(null)}>
           <div className="absolute inset-0 bg-charcoal/75 backdrop-blur-sm" />
-          <div className="relative max-w-5xl w-full max-h-[90vh] bg-white rounded-xl overflow-hidden shadow-2xl animate-fade-in-scale" onClick={(e) => e.stopPropagation()}>
+          <div className="relative max-w-5xl w-full max-h-[90vh] bg-white rounded-lg overflow-hidden shadow-2xl animate-fade-in-scale" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between gap-4 px-4 sm:px-5 py-3 border-b border-border-light">
               <div className="min-w-0">
                 <p className="text-sm font-medium text-charcoal truncate">{previewed.metadata.title || previewed.suggestedLabel}</p>
@@ -259,13 +259,13 @@ function PictureCard({ slot, onEdit, onPreview, onRemove }: { slot: PictureSlot;
   const title = slot.metadata.title || slot.suggestedLabel;
 
   return (
-    <div className={`group bg-white border rounded-xl overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(44,44,44,0.18)] ${hasImage ? 'border-border-light' : 'border-border border-dashed'}`}>
+    <div className={`group bg-white border rounded-lg overflow-hidden transition-all duration-200 hover:shadow-sm ${hasImage ? 'border-border-light' : 'border-border border-dashed'}`}>
       <button type="button" onClick={hasImage ? onPreview : onEdit} className="w-full text-left" aria-label={hasImage ? `Preview ${title}` : `Add photograph to slot ${slot.slotNumber}`}>
-        <div className={`relative aspect-[4/3] overflow-hidden ${hasImage ? 'bg-[#e9e4db]' : 'bg-gradient-to-br from-ivory to-ivory-deep/60'}`}>
+        <div className={`relative aspect-[4/3] overflow-hidden ${hasImage ? 'bg-[#e9e4db]' : 'bg-ivory/60'}`}>
           {hasImage ? (
             <>
               <img src={slot.imageDataUrl!} alt={title} className="w-full h-full object-cover transition duration-500 group-hover:scale-[1.03]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition" />
+              <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/10 transition" />
               <div className="absolute top-2.5 left-2.5">
                 <span className="inline-flex items-center px-2 py-1 rounded-md bg-white/92 backdrop-blur text-[10px] font-semibold tracking-wider text-charcoal uppercase">{String(slot.slotNumber).padStart(2, '0')}</span>
               </div>
