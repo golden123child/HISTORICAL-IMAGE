@@ -106,6 +106,17 @@ export default function ManagePage() {
   const exportSurvey = () => downloadCsv(surveyDataRows(filtered), 'survey-data.csv');
   const exportImages = () => downloadCsv(imageMetadataRows(filtered), 'image-metadata.csv');
 
+  const openPreviewSurvey = async () => {
+    if (!ensureAdmin()) return;
+    setBusy('preview');
+    try {
+      const [r] = await createParticipants(1, { isDemo: true });
+      setRecent(prev => [r, ...prev].slice(0, 20));
+      window.open(`/survey/${r.token}`, '_blank', 'noopener,noreferrer');
+      flash(`Preview survey opened (${r.participantId}).`);
+    } finally { setBusy(''); }
+  };
+
   const createDemo = async (kind: 'complete' | 'incomplete' | 'new') => {
     if (!ensureAdmin()) return;
     setBusy('demo');
@@ -172,6 +183,7 @@ export default function ManagePage() {
           </div>
           <div className="flex items-center gap-2">
             {msg && <span className="text-xs text-olive font-medium">{msg}</span>}
+            <button type="button" onClick={() => void openPreviewSurvey()} disabled={busy === 'preview'} className="inline-flex items-center justify-center rounded-md bg-olive text-white px-4 py-2 text-sm font-medium hover:bg-olive-light transition disabled:opacity-60">Preview Participant Survey</button>
             <button type="button" onClick={lockAdmin} className="inline-flex items-center justify-center rounded-md border border-border bg-white px-4 py-2 text-sm font-medium text-charcoal hover:bg-ivory-deep/40 transition">Lock admin</button>
           </div>
         </div>
