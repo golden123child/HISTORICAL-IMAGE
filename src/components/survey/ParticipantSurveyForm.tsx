@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import type { ParticipantRecord, SurveyImage } from '../../types';
 import { HEAD_POSE_MAX, HEAD_POSE_MIN, HISTORICAL_MAX, HISTORICAL_MIN, NEUTRAL_MAX, NEUTRAL_MIN } from '../../types';
 import { canApprove, countUploaded, getQualityChecks, logEvent } from '../../utils/records';
-import { nowIso } from '../../utils/id';
+import { buildSurveyLink, nowIso, recordToLinkSeed } from '../../utils/id';
 import { isAcceptedImage, readImageAsDataUrl } from '../../utils/image';
 
 interface Props {
@@ -91,7 +91,7 @@ export default function ParticipantSurveyForm(props: Props) {
 
   const qualityChecks = getQualityChecks(record);
   const canApproveNow = adminUnlocked && canApprove(record) && !['approved','locked','forwarded'].includes(record.status);
-  const surveyUrl = `${window.location.origin}/survey/${record.token}`;
+  const surveyUrl = buildSurveyLink(record.token, recordToLinkSeed(record));
 
   return (
     <div className="min-h-screen bg-[#FFFFFF] text-charcoal">
@@ -107,8 +107,9 @@ export default function ParticipantSurveyForm(props: Props) {
               <span className="inline-flex items-center px-2.5 py-1 rounded-md border border-border bg-[#F5F5F5] text-xs font-medium text-charcoal-soft">{statusBadge(record.status)}</span>
             </div>
           </div>
-          <div className="mt-3 text-xs text-muted break-all">
-            <span className="font-medium text-charcoal-soft">Your private link:</span> {surveyUrl}
+          <div className="mt-3 space-y-1 text-xs text-muted break-all">
+            <div><span className="font-medium text-charcoal-soft">Participant reference:</span> {record.participantId}</div>
+            <div><span className="font-medium text-charcoal-soft">Your private link:</span> {surveyUrl}</div>
           </div>
         </header>
 

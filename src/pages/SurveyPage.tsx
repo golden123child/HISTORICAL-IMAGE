@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import type { ParticipantRecord, SurveyImage } from '../types';
 import AdminPasswordModal from '../components/admin/AdminPasswordModal';
-import { canApprove, logEvent } from '../utils/records';
-import { nowIso } from '../utils/id';
+import { canApprove, createParticipantRecord, logEvent } from '../utils/records';
+import { decodeLinkSeed, nowIso } from '../utils/id';
+import { ensureCounterAtLeast } from '../utils/storage';
 import ParticipantSurveyForm from '../components/survey/ParticipantSurveyForm';
 
 export default function SurveyPage() {
   const { token = '' } = useParams();
+  const [searchParams] = useSearchParams();
   const { getByToken, saveParticipant, admin, unlockAdmin } = useApp();
   const [record, setRecord] = useState<ParticipantRecord | null>(null);
   const [loading, setLoading] = useState(true);
@@ -21,8 +23,36 @@ export default function SurveyPage() {
     setLoading(true);
     try {
       const r = await getByToken(token);
-      if (!r) { setNotFound(true); setRecord(null); }
-      else {
+      if (!r) {
+        // Prototype fallback: initialize from self-contained link seed when record is not in local IndexedDB.
+        const seedRaw = searchParams.get('s') || searchParams.get('seed') || '';
+        const seed = seedRaw ? decodeLinkSeed(seedRaw) : null;
+        if (seed && token) {
+          const seq = parseInt(seed.pid.replace(/\D/g, ''), 10) || 1;
+          await ensureCounterAtLeast(seq);
+          const base = createParticipantRecord(seq, { isDemo: !!seed.d, importedName: seed.n, importedPhone: seed.ph });
+          const initialized: ParticipantRecord = {
+            ...base,
+            participantId: seed.pid,
+            token,
+            status: 'in_progress',
+            participantInfo: {
+              ...base.participantInfo,
+              country: seed.c || '',
+              region: (seed.r as any) || '',
+              preferredContactMethod: (seed.cm as any) || '',
+              contactValue: seed.cv || '',
+            },
+            activity: [...base.activity, logEvent('system', 'Participant record initialized from survey link', 'Record was initialized on this device from the participant link seed.')],
+          };
+          await saveParticipant(initialized);
+          setNotFound(false);
+          setRecord(initialized);
+        } else {
+          setNotFound(true);
+          setRecord(null);
+        }
+      } else {
         setNotFound(false);
         // mark opened
         let next = r;
@@ -35,7 +65,7 @@ export default function SurveyPage() {
     } finally {
       setLoading(false);
     }
-  }, [token, getByToken, saveParticipant]);
+  }, [token, searchParams, getByToken, saveParticipant]);
 
   useEffect(() => { void load(); }, [load]);
 

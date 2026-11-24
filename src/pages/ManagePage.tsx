@@ -3,7 +3,7 @@ import { useApp } from '../context/AppContext';
 import AdminPasswordModal from '../components/admin/AdminPasswordModal';
 import type { ParticipantRecord } from '../types';
 import { createParticipantRecord, logEvent } from '../utils/records';
-import { nowIso } from '../utils/id';
+import { buildSurveyLink, nowIso, recordToLinkSeed } from '../utils/id';
 import { downloadCsv, imageMetadataRows, parseParticipantImport, participantRegistryRows, surveyDataRows } from '../utils/csv';
 import { putParticipants, ensureCounterAtLeast, nextParticipantNumber } from '../utils/storage';
 
@@ -112,7 +112,7 @@ export default function ManagePage() {
     try {
       const [r] = await createParticipants(1, { isDemo: true });
       setRecent(prev => [r, ...prev].slice(0, 20));
-      window.open(`/survey/${r.token}`, '_blank', 'noopener,noreferrer');
+      window.open(buildSurveyLink(r.token, recordToLinkSeed(r)), '_blank', 'noopener,noreferrer');
       flash(`Preview survey opened (${r.participantId}).`);
     } finally { setBusy(''); }
   };
@@ -220,10 +220,10 @@ export default function ManagePage() {
                 <div className="max-h-40 overflow-y-auto space-y-2">
                   {recent.map(r => (
                     <div key={r.participantId} className="flex items-center justify-between gap-2 text-xs border border-border-light rounded-md px-2.5 py-2 bg-ivory/30">
-                      <div className="min-w-0"><p className="font-mono text-charcoal">{r.participantId}</p><p className="text-muted truncate">{baseUrl}/survey/{r.token}</p></div>
+                      <div className="min-w-0"><p className="font-mono text-charcoal">{r.participantId}</p><p className="text-muted truncate">{buildSurveyLink(r.token, recordToLinkSeed(r), baseUrl)}</p></div>
                       <div className="flex gap-1 shrink-0">
                         <button type="button" onClick={() => void copyText(r.participantId,'ID')} className="px-2 py-1 rounded border border-border bg-white">ID</button>
-                        <button type="button" onClick={() => void copyText(`${baseUrl}/survey/${r.token}`,'Link')} className="px-2 py-1 rounded border border-border bg-white">Link</button>
+                        <button type="button" onClick={() => void copyText(buildSurveyLink(r.token, recordToLinkSeed(r), baseUrl),'Link')} className="px-2 py-1 rounded border border-border bg-white">Link</button>
                       </div>
                     </div>
                   ))}
@@ -235,7 +235,7 @@ export default function ManagePage() {
           <div className="bg-white border border-border-light rounded-lg p-5 space-y-4">
             <h2 className="font-serif text-xl text-charcoal">Exports</h2>
             <div className="flex flex-col gap-2">
-              <button type="button" onClick={() => void copyText(filtered.map(r => `${r.participantId}\t${baseUrl}/survey/${r.token}`).join('\n'), 'All links')} className="inline-flex items-center justify-center rounded-md border border-border bg-white px-4 py-2.5 text-sm font-medium text-charcoal hover:bg-ivory-deep/40 transition">Copy all filtered links</button>
+              <button type="button" onClick={() => void copyText(filtered.map(r => `${r.participantId}\t${buildSurveyLink(r.token, recordToLinkSeed(r), baseUrl)}`).join('\n'), 'All links')} className="inline-flex items-center justify-center rounded-md border border-border bg-white px-4 py-2.5 text-sm font-medium text-charcoal hover:bg-ivory-deep/40 transition">Copy all filtered links</button>
               <button type="button" onClick={exportRegistry} className="inline-flex items-center justify-center rounded-md border border-border bg-white px-4 py-2.5 text-sm font-medium text-charcoal hover:bg-ivory-deep/40 transition">Export participant registry (CSV)</button>
               <button type="button" onClick={exportSurvey} className="inline-flex items-center justify-center rounded-md border border-border bg-white px-4 py-2.5 text-sm font-medium text-charcoal hover:bg-ivory-deep/40 transition">Export survey data (CSV)</button>
               <button type="button" onClick={exportImages} className="inline-flex items-center justify-center rounded-md border border-border bg-white px-4 py-2.5 text-sm font-medium text-charcoal hover:bg-ivory-deep/40 transition">Export image metadata (CSV)</button>
@@ -291,7 +291,7 @@ export default function ManagePage() {
                  filtered.length === 0 ? <tr><td colSpan={8} className="px-4 py-8 text-center text-muted">No participants found.</td></tr> :
                  filtered.map(r => {
                    const imgs = r.images.filter(i=>i.dataUrl && !i.reviewRejected).length;
-                   const link = `${baseUrl}/survey/${r.token}`;
+                   const link = buildSurveyLink(r.token, recordToLinkSeed(r), baseUrl);
                    return (
                      <tr key={r.participantId} className="hover:bg-ivory/20">
                        <td className="px-4 py-3"><div className="font-medium text-charcoal font-mono text-xs">{r.participantId}</div><div className="text-xs text-muted truncate max-w-[220px]">{r.importedName || r.participantInfo.contactValue || '—'}</div></td>
@@ -302,7 +302,7 @@ export default function ManagePage() {
                        <td className="px-4 py-3 text-charcoal-soft text-xs">{new Date(r.lastActivityAt).toLocaleDateString()}</td>
                        <td className="px-4 py-3"><span className={`inline-flex px-2 py-1 rounded-md border text-xs font-medium ${r.linkStatus==='active'?'bg-white text-charcoal-soft border-border':'bg-[#FFF6E8] text-[#9A5A00] border-[#E8CFA8]'}`}>{r.linkStatus}</span></td>
                        <td className="px-4 py-3"><div className="flex flex-wrap gap-1.5">
-                         <a href={`/survey/${r.token}`} target="_blank" rel="noreferrer" className="px-2.5 py-1.5 rounded-md border border-border bg-white text-xs font-medium hover:bg-ivory-deep/40">Open</a>
+                         <a href={link} target="_blank" rel="noreferrer" className="px-2.5 py-1.5 rounded-md border border-border bg-white text-xs font-medium hover:bg-ivory-deep/40">Open</a>
                          <button type="button" onClick={() => void copyText(r.participantId, 'ID')} className="px-2.5 py-1.5 rounded-md border border-border bg-white text-xs font-medium hover:bg-ivory-deep/40">Copy ID</button>
                          <button type="button" onClick={() => void copyText(link, 'Link')} className="px-2.5 py-1.5 rounded-md border border-border bg-white text-xs font-medium hover:bg-ivory-deep/40">Copy link</button>
                          <button type="button" onClick={() => void toggleLink(r)} className="px-2.5 py-1.5 rounded-md border border-border bg-white text-xs font-medium hover:bg-ivory-deep/40">{r.linkStatus==='active'?'Close':'Reopen'}</button>

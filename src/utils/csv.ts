@@ -1,6 +1,7 @@
 import * as XLSX from 'xlsx';
 import type { ParticipantRecord } from '../types';
 import { countTotalUploaded } from './records';
+import { buildSurveyLink, recordToLinkSeed } from './id';
 
 function escapeCsv(value: unknown): string {
   const s = value == null ? '' : String(value);
@@ -36,7 +37,7 @@ export function participantRegistryRows(records: ParticipantRecord[], baseUrl: s
   return records.map((r) => ({
     participant_id: r.participantId,
     token: r.token,
-    survey_link: `${baseUrl}/survey/${r.token}`,
+    survey_link: buildSurveyLink(r.token, recordToLinkSeed(r), baseUrl),
     country: r.participantInfo.country,
     region: r.participantInfo.region,
     status: r.status,
