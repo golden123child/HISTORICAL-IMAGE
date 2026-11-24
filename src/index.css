@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FFFFFF;
+  --color-ivory-deep: #F5F5F5;
+  --color-cream: #FFFFFF;
+  --color-charcoal: #222222;
+  --color-charcoal-soft: #444444;
+  --color-muted: #666666;
+  --color-olive: #C62828;
+  --color-olive-light: #991B1B;
+  --color-olive-pale: #FDECEC;
+  --color-bronze: #991B1B;
+  --color-bronze-light: #C62828;
+  --color-bronze-pale: #FDECEC;
+  --color-border: #E5E5E5;
+  --color-border-light: #EEEEEE;
+  --color-danger: #B91C1C;
+  --color-danger-pale: #FEF2F2;
+  --color-success: #4A7A5A;
+  --color-success-pale: #EFF6F1;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+:root { color-scheme: light; }
+
+html {
+  font-family: var(--font-sans);
+  color: var(--color-charcoal);
+  background: var(--color-ivory);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body { margin: 0; min-height: 100vh; background: var(--color-ivory); }
+#root { min-height: 100vh; }
+
+::selection { background: var(--color-olive-pale); color: var(--color-olive); }
+
+:focus-visible { outline: 2px solid var(--color-olive); outline-offset: 2px; }
+
+@media (pointer: fine) {
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #D4D4D4; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #BDBDBD; }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-charcoal);
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInScale { from { opacity: 0; transform: scale(0.97); } to { opacity: 1; transform: scale(1); } }
+@keyframes slideInRight { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+.animate-fade-in { animation: fadeIn 0.4s ease-out both; }
+.animate-fade-in-scale { animation: fadeInScale 0.35s ease-out both; }
+.animate-slide-in { animation: slideInRight 0.35s ease-out both; }
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@media print {
+  body { background: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  aside, .no-print { display: none !important; }
+  main { padding: 0 !important; margin: 0 !important; }
+  .print-break { break-inside: avoid; }
+}
