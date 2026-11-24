@@ -5,7 +5,7 @@ import type { ParticipantRecord, SurveyImage } from '../types';
 import AdminPasswordModal from '../components/admin/AdminPasswordModal';
 import { canApprove, createParticipantRecord, logEvent } from '../utils/records';
 import { decodeLinkSeed, nowIso } from '../utils/id';
-import { ensureCounterAtLeast } from '../utils/storage';
+import { ensureCounterAtLeast, nextParticipantNumber } from '../utils/storage';
 import ParticipantSurveyForm from '../components/survey/ParticipantSurveyForm';
 
 export default function SurveyPage() {
@@ -27,24 +27,37 @@ export default function SurveyPage() {
         // Prototype fallback: initialize from self-contained link seed when record is not in local IndexedDB.
         const seedRaw = searchParams.get('s') || searchParams.get('seed') || '';
         const seed = seedRaw ? decodeLinkSeed(seedRaw) : null;
-        if (seed && token) {
-          const seq = parseInt(seed.pid.replace(/\D/g, ''), 10) || 1;
-          await ensureCounterAtLeast(seq);
-          const base = createParticipantRecord(seq, { isDemo: !!seed.d, importedName: seed.n, importedPhone: seed.ph });
-          const initialized: ParticipantRecord = {
-            ...base,
-            participantId: seed.pid,
-            token,
-            status: 'in_progress',
-            participantInfo: {
-              ...base.participantInfo,
-              country: seed.c || '',
-              region: (seed.r as any) || '',
-              preferredContactMethod: (seed.cm as any) || '',
-              contactValue: seed.cv || '',
-            },
-            activity: [...base.activity, logEvent('system', 'Participant record initialized from survey link', 'Record was initialized on this device from the participant link seed.')],
-          };
+        if (token) {
+          let initialized: ParticipantRecord;
+          if (seed) {
+            const seq = parseInt(seed.pid.replace(/\D/g, ''), 10) || 1;
+            await ensureCounterAtLeast(seq);
+            const base = createParticipantRecord(seq, { isDemo: !!seed.d, importedName: seed.n, importedPhone: seed.ph });
+            initialized = {
+              ...base,
+              participantId: seed.pid,
+              token,
+              status: 'in_progress',
+              participantInfo: {
+                ...base.participantInfo,
+                country: seed.c || '',
+                region: (seed.r as any) || '',
+                preferredContactMethod: (seed.cm as any) || '',
+                contactValue: seed.cv || '',
+              },
+              activity: [...base.activity, logEvent('system', 'Participant record initialized from survey link', 'Record was initialized on this device from the participant link seed.')],
+            };
+          } else {
+            // No seed: initialize a blank local record so the survey is usable on any device/browser.
+            const seq = await nextParticipantNumber();
+            const base = createParticipantRecord(seq);
+            initialized = {
+              ...base,
+              token,
+              status: 'in_progress',
+              activity: [...base.activity, logEvent('system', 'Participant record initialized from link token', 'No local record or seed found; a blank local record was initialized for this link.')],
+            };
+          }
           await saveParticipant(initialized);
           setNotFound(false);
           setRecord(initialized);
