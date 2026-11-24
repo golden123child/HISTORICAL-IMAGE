@@ -221,6 +221,41 @@ export default function SurveyPage() {
     void persist(next, msg);
   }, [record, effectiveReadOnly, admin.unlocked, persist]);
 
+  const fillDemo = useCallback(async (kind: 'full' | 'incomplete' | 'new') => {
+    if (!record) return;
+    const makeDataUrl = (label: string, color: string) => `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="${color}"/><rect x="40" y="40" width="720" height="520" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="4"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Arial" font-size="28">${label}</text></svg>`)}`;
+    let next: ParticipantRecord = JSON.parse(JSON.stringify(record));
+    if (kind === 'new') {
+      next.consent = { ageEligible: false, consentResearch: false, consentPermission: false };
+      next.participantInfo = { ageGroup: '', gender: '', region: '', country: '', preferredContactMethod: '', contactValue: '' };
+      next.images = next.images.map((img: any) => ({ ...img, dataUrl: null, fileName: null, mimeType: null, sizeBytes: null, uploadedAt: null, metadata: { title: '', approxYear: '', location: '', category: '', customCategory: '', contextualInfo: '', notes: '' }, reviewRejected: false, reviewNote: '' }));
+      next.status = 'in_progress';
+      next.review.correctionInstructions = '';
+      next.activity = [...next.activity, logEvent('system', 'Demo reset to new respondent')];
+    } else {
+      next.consent = { ageEligible: true, consentResearch: true, consentPermission: true };
+      next.participantInfo = { ageGroup: '25–34', gender: 'Female', region: 'Africa / Middle East', country: 'Nigeria', preferredContactMethod: 'WhatsApp', contactValue: '+2348012345678' };
+      const fillGroup = (group: string, n: number) => {
+        let c = 0;
+        next.images = next.images.map((img: any) => {
+          if (img.group !== group) return img;
+          if (c < n) {
+            c++;
+            const label = img.slotLabel;
+            return { ...img, dataUrl: makeDataUrl(label, group === 'neutral' ? '#C62828' : group === 'head_pose' ? '#991B1B' : '#555555'), fileName: `${img.slotKey}.jpg`, mimeType: 'image/jpeg', sizeBytes: 12000, uploadedAt: nowIso(), reviewRejected: false, reviewNote: '', metadata: group === 'historical' ? { ...img.metadata, approxYear: String(1980 + c), location: 'Lagos, Nigeria', contextualInfo: `Sample historical photo ${c}`, title: `Historical photo ${c}` } : img.metadata };
+          }
+          return { ...img, dataUrl: null, fileName: null, mimeType: null, sizeBytes: null, uploadedAt: null, metadata: { title: '', approxYear: '', location: '', category: '', customCategory: '', contextualInfo: '', notes: '' }, reviewRejected: false, reviewNote: '' };
+        });
+      };
+      if (kind === 'full') { fillGroup('neutral', 4); fillGroup('head_pose', 4); fillGroup('historical', 8); }
+      else { fillGroup('neutral', 1); fillGroup('head_pose', 1); fillGroup('historical', 2); }
+      next.status = 'draft_saved';
+      next.activity = [...next.activity, logEvent('system', kind === 'full' ? 'Demo full set filled' : 'Demo incomplete set filled')];
+    }
+    next.lastActivityAt = nowIso();
+    await persist(next, kind === 'new' ? 'New respondent demo loaded.' : kind === 'full' ? 'Full demo set loaded.' : 'Incomplete demo set loaded.');
+  }, [record, persist]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-ivory flex items-center justify-center px-6">
@@ -264,40 +299,6 @@ export default function SurveyPage() {
     );
   }
 
-  const fillDemo = useCallback(async (kind: 'full' | 'incomplete' | 'new') => {
-    if (!record) return;
-    const makeDataUrl = (label: string, color: string) => `data:image/svg+xml;utf8,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><rect width="100%" height="100%" fill="${color}"/><rect x="40" y="40" width="720" height="520" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="4"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Arial" font-size="28">${label}</text></svg>`)}`;
-    let next: ParticipantRecord = JSON.parse(JSON.stringify(record));
-    if (kind === 'new') {
-      next.consent = { ageEligible: false, consentResearch: false, consentPermission: false };
-      next.participantInfo = { ageGroup: '', gender: '', region: '', country: '', preferredContactMethod: '', contactValue: '' };
-      next.images = next.images.map((img: any) => ({ ...img, dataUrl: null, fileName: null, mimeType: null, sizeBytes: null, uploadedAt: null, metadata: { title: '', approxYear: '', location: '', category: '', customCategory: '', contextualInfo: '', notes: '' }, reviewRejected: false, reviewNote: '' }));
-      next.status = 'in_progress';
-      next.review.correctionInstructions = '';
-      next.activity = [...next.activity, logEvent('system', 'Demo reset to new respondent')];
-    } else {
-      next.consent = { ageEligible: true, consentResearch: true, consentPermission: true };
-      next.participantInfo = { ageGroup: '25–34', gender: 'Female', region: 'Africa / Middle East', country: 'Nigeria', preferredContactMethod: 'WhatsApp', contactValue: '+2348012345678' };
-      const fillGroup = (group: string, n: number) => {
-        let c = 0;
-        next.images = next.images.map((img: any) => {
-          if (img.group !== group) return img;
-          if (c < n) {
-            c++;
-            const label = img.slotLabel;
-            return { ...img, dataUrl: makeDataUrl(label, group === 'neutral' ? '#C62828' : group === 'head_pose' ? '#991B1B' : '#555555'), fileName: `${img.slotKey}.jpg`, mimeType: 'image/jpeg', sizeBytes: 12000, uploadedAt: nowIso(), reviewRejected: false, reviewNote: '', metadata: group === 'historical' ? { ...img.metadata, approxYear: String(1980 + c), location: 'Lagos, Nigeria', contextualInfo: `Sample historical photo ${c}`, title: `Historical photo ${c}` } : img.metadata };
-          }
-          return { ...img, dataUrl: null, fileName: null, mimeType: null, sizeBytes: null, uploadedAt: null, metadata: { title: '', approxYear: '', location: '', category: '', customCategory: '', contextualInfo: '', notes: '' }, reviewRejected: false, reviewNote: '' };
-        });
-      };
-      if (kind === 'full') { fillGroup('neutral', 4); fillGroup('head_pose', 4); fillGroup('historical', 8); }
-      else { fillGroup('neutral', 1); fillGroup('head_pose', 1); fillGroup('historical', 2); }
-      next.status = 'draft_saved';
-      next.activity = [...next.activity, logEvent('system', kind === 'full' ? 'Demo full set filled' : 'Demo incomplete set filled')];
-    }
-    next.lastActivityAt = nowIso();
-    await persist(next, kind === 'new' ? 'New respondent demo loaded.' : kind === 'full' ? 'Full demo set loaded.' : 'Incomplete demo set loaded.');
-  }, [record, persist]);
 
   return (
     <>
