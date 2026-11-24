@@ -250,13 +250,21 @@ export default function ParticipantSurveyForm(props: Props) {
           </section>
         </form>
 
-        {/* Staff area */}
-        <div className="mt-12 pt-6 border-t border-border">
-          <p className="text-xs uppercase tracking-wider text-muted mb-2">Staff area</p>
+        {/* Admin sign-in - discreet, below Save Draft */}
+        <div className="mt-8">
           {!adminUnlocked ? (
-            <button type="button" onClick={onRequestAdmin} className="text-sm text-charcoal-soft underline underline-offset-2 hover:text-charcoal">Staff login</button>
+            <button
+              type="button"
+              onClick={onRequestAdmin}
+              className="text-[11px] text-muted hover:text-charcoal-soft underline underline-offset-2"
+            >
+              Admin sign-in
+            </button>
           ) : (
-            <StaffPanel record={record} qualityChecks={qualityChecks} canApproveNow={canApproveNow} correctionText={correctionText} setCorrectionText={setCorrectionText} onApprove={onApprove} onReopen={onReopen} onRequestCorrections={onRequestCorrections} onCloseLink={onCloseLink} onReopenLink={onReopenLink} onForward={onForward} />
+            <div className="pt-6 border-t border-border">
+              <p className="text-xs uppercase tracking-wider text-muted mb-3">Staff area</p>
+              <StaffPanel record={record} qualityChecks={qualityChecks} canApproveNow={canApproveNow} correctionText={correctionText} setCorrectionText={setCorrectionText} onApprove={onApprove} onReopen={onReopen} onRequestCorrections={onRequestCorrections} onCloseLink={onCloseLink} onReopenLink={onReopenLink} onForward={onForward} />
+            </div>
           )}
         </div>
       </div>

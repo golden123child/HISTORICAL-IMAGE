@@ -210,7 +210,7 @@ export default function SurveyPage() {
           <p className="text-[11px] tracking-[0.24em] uppercase text-bronze font-medium mb-2">Fieldwork Africa</p>
           <h1 className="font-serif text-3xl text-charcoal mb-3">Survey link unavailable</h1>
           <p className="text-sm text-muted leading-relaxed mb-6">This survey link is currently unavailable. Please contact the Fieldwork Africa research team if you need assistance.</p>
-          <button type="button" onClick={() => setAdminModal(true)} className="text-sm text-olive hover:text-olive-light font-medium">Administrator access</button>
+          <button type="button" onClick={() => setAdminModal(true)} className="text-[11px] text-muted hover:text-charcoal-soft underline underline-offset-2">Admin sign-in</button>
         </div>
         <AdminPasswordModal open={adminModal} onClose={() => setAdminModal(false)} onUnlock={(pw) => { const ok = unlockAdmin(pw); if (ok) setAdminModal(false); return ok; }} />
       </div>
