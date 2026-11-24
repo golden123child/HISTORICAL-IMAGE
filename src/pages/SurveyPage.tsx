@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import type { ParticipantRecord, SurveyImage } from '../types';
 import AdminPasswordModal from '../components/admin/AdminPasswordModal';
@@ -10,7 +10,6 @@ import ParticipantSurveyForm from '../components/survey/ParticipantSurveyForm';
 
 export default function SurveyPage() {
   const { token = '' } = useParams();
-  const [searchParams] = useSearchParams();
   const { getByToken, saveParticipant, admin, unlockAdmin } = useApp();
   const [record, setRecord] = useState<ParticipantRecord | null>(null);
   const [loading, setLoading] = useState(true);
@@ -25,7 +24,8 @@ export default function SurveyPage() {
       const r = await getByToken(token);
       if (!r) {
         // Prototype fallback: initialize from self-contained link seed when record is not in local IndexedDB.
-        const seedRaw = searchParams.get('s') || searchParams.get('seed') || '';
+        const sp = new URLSearchParams(window.location.search);
+        const seedRaw = sp.get('s') || sp.get('seed') || '';
         const seed = seedRaw ? decodeLinkSeed(seedRaw) : null;
         if (token) {
           let initialized: ParticipantRecord;
@@ -75,10 +75,14 @@ export default function SurveyPage() {
         }
         setRecord(next);
       }
+    } catch (err) {
+      console.error('Failed to load survey link', err);
+      setNotFound(true);
+      setRecord(null);
     } finally {
       setLoading(false);
     }
-  }, [token, searchParams, getByToken, saveParticipant]);
+  }, [token, getByToken, saveParticipant]);
 
   useEffect(() => { void load(); }, [load]);
 
