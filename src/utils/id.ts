@@ -22,6 +22,7 @@ export function nowIso(): string {
 
 export interface LinkSeed {
   pid: string; // participantId
+  fn?: string; // full name
   n?: string; // imported name
   ph?: string; // imported phone
   c?: string; // country
@@ -59,8 +60,9 @@ export function buildSurveyLink(token: string, seed: LinkSeed, origin?: string):
   return `${base}/survey/${token}?s=${encodeLinkSeed(seed)}`;
 }
 
-export function recordToLinkSeed(r: { participantId: string; importedName?: string; importedPhone?: string; participantInfo: { country: string; region: string; preferredContactMethod: string; contactValue: string }; isDemo?: boolean }): LinkSeed {
+export function recordToLinkSeed(r: { participantId: string; importedName?: string; importedPhone?: string; participantInfo: { fullName?: string; country: string; region: string; preferredContactMethod: string; contactValue: string }; isDemo?: boolean }): LinkSeed {
   const seed: LinkSeed = { pid: r.participantId };
+  if (r.participantInfo.fullName) seed.fn = r.participantInfo.fullName;
   if (r.importedName) seed.n = r.importedName;
   if (r.importedPhone) seed.ph = r.importedPhone;
   if (r.participantInfo.country) seed.c = r.participantInfo.country;

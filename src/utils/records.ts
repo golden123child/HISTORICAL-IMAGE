@@ -73,6 +73,7 @@ export function createParticipantRecord(seq: number, overrides?: Partial<Pick<Pa
     linkStatus: 'active',
     consent: { ageEligible: false, consentResearch: false, consentPermission: false },
     participantInfo: {
+      fullName: '',
       ageGroup: '',
       gender: '',
       region: '',
@@ -104,6 +105,9 @@ export function normalizeRecord(input: any): ParticipantRecord {
   const r: any = { ...base, ...input };
   r.consent = { ...base.consent, ...(input?.consent || {}) };
   r.participantInfo = { ...base.participantInfo, ...(input?.participantInfo || {}) };
+  if (!r.participantInfo.fullName && (input?.importedName || r.importedName)) {
+    r.participantInfo.fullName = input?.importedName || r.importedName || '';
+  }
   r.review = { ...base.review, ...(input?.review || {}) };
   r.activity = Array.isArray(input?.activity) ? input.activity : base.activity;
   r.linkStatus = input?.linkStatus === 'closed' ? 'closed' : 'active';
@@ -187,7 +191,7 @@ export function hasConsent(c: ParticipantRecord['consent']): boolean {
 }
 
 export function isParticipantInfoComplete(p: ParticipantRecord['participantInfo']): boolean {
-  const base = !!(p.ageGroup && p.gender && p.region && p.country && p.preferredContactMethod && p.contactValue.trim());
+  const base = !!(p.fullName?.trim() && p.ageGroup && p.gender && p.region && p.country && p.preferredContactMethod && p.contactValue.trim());
   if (!base) return false;
   if (p.preferredContactMethod === 'Email') return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.contactValue.trim());
   return p.contactValue.replace(/\D/g, '').length >= 7;
@@ -221,7 +225,7 @@ export function getQualityChecks(record: ParticipantRecord): QualityCheck[] {
   const metaOk = historicalMetadataComplete(record.images);
   return [
     { label: 'Consent completed', ok: hasConsent(record.consent), detail: hasConsent(record.consent) ? 'All consent confirmations provided.' : 'Consent is incomplete.' },
-    { label: 'Participant information complete', ok: isParticipantInfoComplete(record.participantInfo), detail: isParticipantInfoComplete(record.participantInfo) ? 'Required participant information provided.' : 'Required participant information is incomplete.' },
+    { label: 'Participant information complete', ok: isParticipantInfoComplete(record.participantInfo), detail: isParticipantInfoComplete(record.participantInfo) ? 'Required participant information provided.' : 'Name, age group, gender, region, country, and contact are required.' },
     { label: 'Contact information valid', ok: contactValid, detail: contactValid ? `${info.preferredContactMethod || 'Contact'} provided.` : 'Valid contact information required.' },
     { label: 'Neutral photos', ok: neutral >= NEUTRAL_MIN, detail: `${neutral}/${NEUTRAL_MIN} minimum (${neutral} of ${NEUTRAL_MAX} uploaded).` },
     { label: 'Head poses', ok: head >= HEAD_POSE_MIN, detail: `${head}/${HEAD_POSE_MIN} minimum (${head} of ${HEAD_POSE_MAX} uploaded).` },

@@ -110,9 +110,16 @@ export function AppProvider({ children }: { children: ReactNode }) {
     for (const row of rows) {
       const seq = await nextParticipantNumber();
       const rec = createParticipantRecord(seq, { importedName: row.name, importedPhone: row.phone || row.email });
+      if (row.name) rec.participantInfo.fullName = row.name;
       if (row.country) rec.participantInfo.country = row.country;
-      if (row.region && ['Africa','Middle East','Europe','North America','South America','Asia','Australia/Oceania'].includes(row.region)) {
-        rec.participantInfo.region = row.region as ParticipantRecord['participantInfo']['region'];
+      if (row.region) {
+        const regionMap: Record<string, string> = {
+          'Africa': 'Africa / Middle East', 'Middle East': 'Africa / Middle East', 'Africa / Middle East': 'Africa / Middle East',
+          'Europe': 'Europe', 'North America': 'North / South America', 'South America': 'North / South America', 'North / South America': 'North / South America',
+          'Asia': 'South / Southeast Asia', 'South / Southeast Asia': 'South / Southeast Asia', 'Australia/Oceania': 'Australia', 'Australia': 'Australia',
+        };
+        const mapped = regionMap[row.region];
+        if (mapped) rec.participantInfo.region = mapped as any;
       }
       // prefill contact if provided
       if (row.email) { rec.participantInfo.preferredContactMethod = 'Email'; rec.participantInfo.contactValue = row.email; }

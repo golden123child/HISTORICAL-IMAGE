@@ -127,7 +127,7 @@ export default function ManagePage() {
       const rec = createParticipantRecord(seq, { isDemo: true });
       rec.importedName = kind === 'complete' ? 'Demo Complete Participant' : 'Demo Incomplete Participant';
       rec.participantInfo = {
-        ageGroup: '25–34', gender: 'Female', region: 'Africa / Middle East', country: 'Nigeria',
+        fullName: kind === 'complete' ? 'Demo Complete Participant' : 'Demo Incomplete Participant', ageGroup: '25–34', gender: 'Female', region: 'Africa / Middle East', country: 'Nigeria',
         preferredContactMethod: 'Email', contactValue: kind === 'complete' ? 'demo.participant@example.com' : '',
       };
       rec.consent = { ageEligible: true, consentResearch: true, consentPermission: kind === 'complete' };
@@ -294,7 +294,7 @@ export default function ManagePage() {
                    const link = buildSurveyLink(r.token, recordToLinkSeed(r), baseUrl);
                    return (
                      <tr key={r.participantId} className="hover:bg-ivory/20">
-                       <td className="px-4 py-3"><div className="font-medium text-charcoal font-mono text-xs">{r.participantId}</div><div className="text-xs text-muted truncate max-w-[220px]">{r.importedName || r.participantInfo.contactValue || '—'}</div></td>
+                       <td className="px-4 py-3"><div className="font-medium text-charcoal font-mono text-xs">{r.participantId}</div><div className="text-xs text-muted truncate max-w-[220px]">{r.participantInfo.fullName || r.importedName || r.participantInfo.contactValue || '—'}</div></td>
                        <td className="px-4 py-3 text-charcoal-soft"><div>{r.participantInfo.country || '—'}</div><div className="text-xs text-muted">{r.participantInfo.region || '—'}</div></td>
                        <td className="px-4 py-3"><span className={`inline-flex px-2 py-1 rounded-md border text-xs font-medium ${statusClass(r.status)}`}>{statusLabel(r.status)}</span></td>
                        <td className="px-4 py-3 text-charcoal-soft">{imgs}</td>

@@ -40,6 +40,7 @@ export default function SurveyPage() {
               status: 'in_progress',
               participantInfo: {
                 ...base.participantInfo,
+                fullName: seed.fn || seed.n || '',
                 country: seed.c || '',
                 region: (seed.r as any) || '',
                 preferredContactMethod: (seed.cm as any) || '',
@@ -227,14 +228,14 @@ export default function SurveyPage() {
     let next: ParticipantRecord = JSON.parse(JSON.stringify(record));
     if (kind === 'new') {
       next.consent = { ageEligible: false, consentResearch: false, consentPermission: false };
-      next.participantInfo = { ageGroup: '', gender: '', region: '', country: '', preferredContactMethod: '', contactValue: '' };
+      next.participantInfo = { fullName: '', ageGroup: '', gender: '', region: '', country: '', preferredContactMethod: '', contactValue: '' };
       next.images = next.images.map((img: any) => ({ ...img, dataUrl: null, fileName: null, mimeType: null, sizeBytes: null, uploadedAt: null, metadata: { title: '', approxYear: '', location: '', category: '', customCategory: '', contextualInfo: '', notes: '' }, reviewRejected: false, reviewNote: '' }));
       next.status = 'in_progress';
       next.review.correctionInstructions = '';
       next.activity = [...next.activity, logEvent('system', 'Demo reset to new respondent')];
     } else {
       next.consent = { ageEligible: true, consentResearch: true, consentPermission: true };
-      next.participantInfo = { ageGroup: '25–34', gender: 'Female', region: 'Africa / Middle East', country: 'Nigeria', preferredContactMethod: 'WhatsApp', contactValue: '+2348012345678' };
+      next.participantInfo = { fullName: 'Amara Okafor', ageGroup: '25–34', gender: 'Female', region: 'Africa / Middle East', country: 'Nigeria', preferredContactMethod: 'WhatsApp', contactValue: '+2348012345678' };
       const fillGroup = (group: string, n: number) => {
         let c = 0;
         next.images = next.images.map((img: any) => {

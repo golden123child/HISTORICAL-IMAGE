@@ -27,6 +27,7 @@ export interface ConsentInfo {
 }
 
 export interface ParticipantInfo {
+  fullName: string;
   ageGroup: '' | '18–24' | '25–34' | '35–44' | '45–54' | '55–64' | '65+';
   gender: '' | 'Female' | 'Male' | 'Non-binary' | 'Prefer not to say';
   region: '' | 'South / Southeast Asia' | 'Africa / Middle East' | 'Europe' | 'North / South America' | 'Australia';
