@@ -18,7 +18,7 @@ function statusClass(s: string) {
 
 export default function ManagePage() {
   const { participants, loading, admin, unlockAdmin, lockAdmin, createParticipants, createImportedParticipants, saveParticipant, refresh, resetAllData } = useApp();
-  const [pwOpen, setPwOpen] = useState(!admin.unlocked);
+  const [pwOpen, setPwOpen] = useState(false);
   const [q, setQ] = useState('');
   const [statusFilter, setStatusFilter] = useState('all');
   const [linkFilter, setLinkFilter] = useState('all');
