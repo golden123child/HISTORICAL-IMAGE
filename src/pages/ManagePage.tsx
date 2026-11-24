@@ -127,7 +127,7 @@ export default function ManagePage() {
       const rec = createParticipantRecord(seq, { isDemo: true });
       rec.importedName = kind === 'complete' ? 'Demo Complete Participant' : 'Demo Incomplete Participant';
       rec.participantInfo = {
-        ageGroup: '25–34', gender: 'Female', region: 'Africa', country: 'Nigeria',
+        ageGroup: '25–34', gender: 'Female', region: 'Africa / Middle East', country: 'Nigeria',
         preferredContactMethod: 'Email', contactValue: kind === 'complete' ? 'demo.participant@example.com' : '',
       };
       rec.consent = { ageEligible: true, consentResearch: true, consentPermission: kind === 'complete' };

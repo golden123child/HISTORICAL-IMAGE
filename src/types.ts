@@ -29,7 +29,7 @@ export interface ConsentInfo {
 export interface ParticipantInfo {
   ageGroup: '' | '18–24' | '25–34' | '35–44' | '45–54' | '55–64' | '65+';
   gender: '' | 'Female' | 'Male' | 'Non-binary' | 'Prefer not to say';
-  region: '' | 'Africa' | 'Middle East' | 'Europe' | 'North America' | 'South America' | 'Asia' | 'Australia/Oceania';
+  region: '' | 'South / Southeast Asia' | 'Africa / Middle East' | 'Europe' | 'North / South America' | 'Australia';
   country: string;
   preferredContactMethod: '' | 'WhatsApp' | 'Email';
   contactValue: string;

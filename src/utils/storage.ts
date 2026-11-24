@@ -1,4 +1,5 @@
 import type { ParticipantRecord } from '../types';
+import { normalizeRecord, normalizeRecords } from './records';
 
 const DB_NAME = 'fwa-historical-survey-v1';
 const DB_VERSION = 1;
@@ -30,7 +31,7 @@ export async function getAllParticipants(): Promise<ParticipantRecord[]> {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(STORE, 'readonly');
     const req = tx.objectStore(STORE).getAll();
-    req.onsuccess = () => resolve((req.result as ParticipantRecord[]) || []);
+    req.onsuccess = () => resolve(normalizeRecords((req.result as any[]) || []));
     req.onerror = () => reject(req.error);
     tx.oncomplete = () => db.close();
   });
@@ -41,7 +42,7 @@ export async function getParticipantById(participantId: string): Promise<Partici
   return new Promise((resolve, reject) => {
     const tx = db.transaction(STORE, 'readonly');
     const req = tx.objectStore(STORE).get(participantId);
-    req.onsuccess = () => resolve(req.result as ParticipantRecord | undefined);
+    req.onsuccess = () => resolve(req.result ? normalizeRecord(req.result) : undefined);
     req.onerror = () => reject(req.error);
     tx.oncomplete = () => db.close();
   });
@@ -53,7 +54,7 @@ export async function getParticipantByToken(token: string): Promise<ParticipantR
     const tx = db.transaction(STORE, 'readonly');
     const idx = tx.objectStore(STORE).index('token');
     const req = idx.get(token);
-    req.onsuccess = () => resolve(req.result as ParticipantRecord | undefined);
+    req.onsuccess = () => resolve(req.result ? normalizeRecord(req.result) : undefined);
     req.onerror = () => reject(req.error);
     tx.oncomplete = () => db.close();
   });
